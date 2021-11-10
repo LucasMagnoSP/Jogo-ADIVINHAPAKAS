@@ -6,21 +6,15 @@ public class App {
     public static void main(String[] args) throws Exception {
     
         int dica, superdica,superdicagen;
-        int tentativas = 0, acerto= 0,qntdica = 5,contsuperdica=0;
+        int tentativas = 0, acerto= 0,qntdica = 5,contsuperdica=0,dificult;
         int[] numeroInputCerto , novaSenha;
         String[]sinais;
+        Object[] dificuldade = {"Facil", "Normal", "Dificil"};
 
-        novaSenha = geracodigoAleatorio();//METODO BLOCO GERADOR
-        //HACK XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-            System.out.println(novaSenha[3]);
-            System.out.println(novaSenha[2]);
-            System.out.println(novaSenha[1]);
-            System.out.println(novaSenha[0]);
-        //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         //REGRAS    
             JOptionPane.showMessageDialog(null, 
             "                                 Bem Vindo ao ADIVINHAPAKAS !!\n\n" + 
-                            "Esse é um jogo no qual você precisa acertar uma senha aleatoria de 4 digitos.\n\n"+
+                            "Esse é um jogo no qual você precisa acertar um numero aleatório.\n\n"+
                             "Não temos TIMER, então fique a vontade para pensar.\n\n" +
                             "Tambem não temos limite de tentativas, pode chutar a vontade !\n\n",
             "ADIVINHAPAKAS",1);
@@ -32,10 +26,14 @@ public class App {
                             "Caso a dica seja  ' \uD83D\uDD3B ' significa que o numero digitado é menor que o correto ! \n\n",
             "ADIVINHAPAKAS",1);
         //FIM REGRAS 
+
+        dificult = JOptionPane.showOptionDialog(null,"Selecione um nivel de dificuldade","AdivinhaPakas",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,dificuldade,dificuldade[2]);
+        novaSenha = geracodigoAleatorio(dificult);//METODO BLOCO GERADOR e SELETOR de DIFICULDADE
+
         //INICIO JOGO
         do {
             tentativas++;  
-            numeroInputCerto = lerInputUsuario();//METODO INPUT USUARIO
+            numeroInputCerto = lerInputUsuario(dificult);//METODO INPUT USUARIO
             //BLOCO ACERTO
             if(Arrays.equals(numeroInputCerto ,novaSenha )){
                 if (tentativas==1) {    
@@ -66,14 +64,35 @@ public class App {
                                 contsuperdica++;
                              // FIM BLOCO SUPER DICA
                             }
-                         //BLOCO SINAIS DE DICA   
-                            sinais = sinaisDica(numeroInputCerto,novaSenha); //METODOS SINAIS DE DICA
+                         //BLOCO SINAIS DE DICA
+                         if(dificult == 0){
+                            sinais = sinaisDica(numeroInputCerto,novaSenha,dificult); //METODOS SINAIS DE DICA
+                            JOptionPane.showMessageDialog(null,"   Codigo digitado : "+numeroInputCerto[1]+numeroInputCerto[0]+"\n"+
+                            "                 " +numeroInputCerto[1]+ "  é  " +sinais[1]+ "\n"+
+                            "                 " +numeroInputCerto[0]+ "  é  " +sinais[0]+ "\n",
+                            "ADIVINHPAKAS",1);
+                         }
+                         else if(dificult == 1){
+                            sinais = sinaisDica(numeroInputCerto,novaSenha,dificult); //METODOS SINAIS DE DICA
                             JOptionPane.showMessageDialog(null,"   Codigo digitado : "+numeroInputCerto[3]+numeroInputCerto[2]+numeroInputCerto[1]+numeroInputCerto[0]+"\n"+
                             "                 " +numeroInputCerto[3]+ "  é  " +sinais[3]+ "\n"+
                             "                 " +numeroInputCerto[2]+ "  é  " +sinais[2]+ "\n"+
                             "                 " +numeroInputCerto[1]+ "  é  " +sinais[1]+ "\n"+
                             "                 " +numeroInputCerto[0]+ "  é  " +sinais[0]+ "\n",
                             "ADIVINHPAKAS",1);
+                         }
+                         else{
+                            sinais = sinaisDica(numeroInputCerto,novaSenha,dificult); //METODOS SINAIS DE DICA
+                            JOptionPane.showMessageDialog(null,"   Codigo digitado : "+numeroInputCerto[5]+numeroInputCerto[4]+numeroInputCerto[3]+numeroInputCerto[2]+numeroInputCerto[1]+numeroInputCerto[0]+"\n"+
+                            "                 " +numeroInputCerto[5]+ "  é  " +sinais[5]+ "\n"+
+                            "                 " +numeroInputCerto[4]+ "  é  " +sinais[4]+ "\n"+
+                            "                 " +numeroInputCerto[3]+ "  é  " +sinais[3]+ "\n"+
+                            "                 " +numeroInputCerto[2]+ "  é  " +sinais[2]+ "\n"+
+                            "                 " +numeroInputCerto[1]+ "  é  " +sinais[1]+ "\n"+
+                            "                 " +numeroInputCerto[0]+ "  é  " +sinais[0]+ "\n",
+                            "ADIVINHPAKAS",1);
+                         }   
+                            
                          //FIM BLOCO SINAIS DE DICA
                             qntdica = (qntdica - 1) ;     
                         }
@@ -91,12 +110,25 @@ public class App {
         } while (acerto != 1);
     }
 
-    public static int[] geracodigoAleatorio() {//BLOCO GERADOR
+    public static int[] geracodigoAleatorio(int dificult) {//BLOCO GERADOR e SELETOR de DIFICULDADE 
         int senhaGerada =0;
-        do {
-            senhaGerada = (int) Math.round(Math.random()*9999);
-        } while (senhaGerada < 999);
+        if (dificult == 0){
+            do {
+                senhaGerada = (int) Math.round(Math.random()*99);
+            } while (senhaGerada < 9);
+        }
+        else if (dificult == 1){
+            do {
+                senhaGerada = (int) Math.round(Math.random()*9999);
+            } while (senhaGerada < 999);
+        }
+        else{
+            do {
+                senhaGerada = (int) Math.round(Math.random()*999999);
+            } while (senhaGerada < 99999);
+        }
         String senha = Integer.toString(senhaGerada);
+        System.out.println(senha);      
         int[] novaSenha = new int[senha.length()];
         for (int i = 0; i < senha.length(); i++)
         {
@@ -106,12 +138,21 @@ public class App {
         return novaSenha;     
     }
 
-    public static int[] lerInputUsuario() {//METODO INPUT USUARIO
+    public static int[] lerInputUsuario(int dificult) {//METODO INPUT USUARIO
         int[] numeroInputCerto;
         String inputNumero;
-        int numeroInput;
+        int numeroInput,inputLength;
+        if(dificult == 0){
+            inputLength = 2;
+        }
+        else if(dificult == 1){
+            inputLength = 4;
+        }
+        else{
+            inputLength = 6;
+        }
         do{  
-            inputNumero = JOptionPane.showInputDialog(null,"Digite uma senha de 4 digitos :","ADIVINHPAKAS",JOptionPane.INFORMATION_MESSAGE);
+            inputNumero = JOptionPane.showInputDialog(null,"Digite uma senha de "+inputLength+" digitos:","ADIVINHPAKAS",JOptionPane.INFORMATION_MESSAGE);
             numeroInput = Integer.parseInt(inputNumero);
             String senhaInput = Integer.toString(numeroInput);
             numeroInputCerto = new int[senhaInput.length()];
@@ -120,10 +161,10 @@ public class App {
                 numeroInputCerto[i] = numeroInput%10;
                 numeroInput = (numeroInput - numeroInputCerto[i])/10;
             }
-            if(numeroInputCerto.length > 4 || numeroInputCerto.length < 4 ){
-                JOptionPane.showMessageDialog(null,"A senha deve conter 4 DIGITOS !","ADIVINHPAKAS",JOptionPane.INFORMATION_MESSAGE);
+            if(numeroInputCerto.length > inputLength || numeroInputCerto.length < inputLength ){
+                JOptionPane.showMessageDialog(null,"A senha deve conter "+inputLength+" DIGITOS !","ADIVINHPAKAS",JOptionPane.INFORMATION_MESSAGE);
             } 
-        }while(numeroInputCerto.length != 4);
+        }while(numeroInputCerto.length != inputLength);
         return numeroInputCerto;
     }  
     
@@ -147,8 +188,17 @@ public class App {
         }   
     }
 
-    public static String[] sinaisDica(int[] numeroInputCerto, int[]novaSenha) {//METODOS SINAIS DE DICA
-        String[]sinais = {"","","",""} ;
+    public static String[] sinaisDica(int[] numeroInputCerto, int[]novaSenha, int dificult) {//METODOS SINAIS DE DICA
+        String[]sinais;
+        if (dificult == 0){
+            sinais = new String[2];
+        }
+        else if(dificult == 1){
+            sinais = new String[4];
+        }
+        else{
+            sinais = new String[6];
+        }
         for (int i = 0; i < sinais.length; i++) {
             if(numeroInputCerto[i] == novaSenha[i]){
                 sinais[i]  = "\u2705";                     
