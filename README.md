@@ -9,4 +9,5 @@ Esse jogo foi realizado como um projeto da aula de Laboratório de Desenvolvimen
 -Tem uma pequena chance de vir uma SuperDica, que revela um numero da senha aleatória.
 -Não tem limite de tentativas
 
-
+V1.011121  10/11/21
+-Níveis de dificuldade (Fácil/Normal/Difícil) adicionados ao jogo.
