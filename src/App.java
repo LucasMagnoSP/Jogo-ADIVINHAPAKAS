@@ -13,7 +13,7 @@ public class App {
 
         //REGRAS    
             JOptionPane.showMessageDialog(null, 
-            "                                 Bem Vindo ao ADIVINHAPAKAS !!\n\n" + 
+            "                             Bem Vindo ao ADIVINHAPAKAS !!\n\n" + 
                             "Esse é um jogo no qual você precisa acertar um numero aleatório.\n\n"+
                             "Não temos TIMER, então fique a vontade para pensar.\n\n" +
                             "Tambem não temos limite de tentativas, pode chutar a vontade !\n\n",
