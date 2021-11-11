@@ -57,10 +57,10 @@ public class App {
                     case JOptionPane.YES_OPTION :
                         if(qntdica > 0){
                             //BLOCO SUPER DICA 
-                            superdicagen = (int)Math.round(Math.random()*3);
-                            superdica = (int)Math.round(Math.random()*3);
+                            superdicagen = (int)Math.round(Math.random()*2);
+                            superdica = (int)Math.round(Math.random()*2);
                             if(superdica == superdicagen){
-                                superdicaSwitch(superdicagen, superdica, novaSenha,contsuperdica);//METODO SUPER DICA 
+                                superdicaSwitch(superdicagen, superdica, novaSenha,contsuperdica,dificult);//METODO SUPER DICA 
                                 contsuperdica++;
                              // FIM BLOCO SUPER DICA
                             }
@@ -168,24 +168,46 @@ public class App {
         return numeroInputCerto;
     }  
     
-    public static void superdicaSwitch(int superdicagen,int superdica, int[]novaSenha, int contsuperdica) {//METODO SUPER DICA
-        if(superdica == superdicagen){
-            switch (contsuperdica) {
-                case 0:
-                    JOptionPane.showMessageDialog(null, "Se você esta lendo essa mensagem, PARABENS, você ganhou uma SUPERDICA\n\n"+
+    public static void superdicaSwitch(int superdicagen,int superdica, int[]novaSenha, int contsuperdica, int dificult) {//METODO SUPER DICA
+        switch (contsuperdica) {
+            case 0:
+                JOptionPane.showMessageDialog(null, "Se você esta lendo essa mensagem, PARABENS, você ganhou uma SUPERDICA\n\n"+
                     "SUPERDICAS tem uma chance minina de aparecerem, e revelam um dos numeros do código !","ADIVINHPAKAS",1);
+                if(dificult == 0){
+                    JOptionPane.showMessageDialog(null, "Você ganhou uma SUPERDICA !!\nO primeiro numero do código é : " + novaSenha[1],"ADIVINHPAKAS",1);
+                }
+                else if(dificult==1){
                     JOptionPane.showMessageDialog(null, "Você ganhou uma SUPERDICA !!\nO primeiro numero do código é : " + novaSenha[3],"ADIVINHPAKAS",1);
-                break;
-                case 1:
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Você ganhou uma SUPERDICA !!\nO primeiro numero do código é : " + novaSenha[5],"ADIVINHPAKAS",1);
+                }
+            break;
+            case 1:
+                if(dificult == 0){
+                    JOptionPane.showMessageDialog(null, "Você ganhou uma SUPERDICA !!\nO segundo numero do código é : " + novaSenha[0],"ADIVINHPAKAS",1);
+                }
+                else if(dificult==1){
                     JOptionPane.showMessageDialog(null, "Você ganhou uma SUPERDICA !!\nO segundo numero do código é : " + novaSenha[2],"ADIVINHPAKAS",1);
-                break;
-                case 2:
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Você ganhou uma SUPERDICA !!\nO segundo numero do código é : " + novaSenha[4],"ADIVINHPAKAS",1);
+                }
+            break;
+            case 2:
+                if(dificult ==0){
+                    break;
+                }
+                else if(dificult==1){
                     JOptionPane.showMessageDialog(null, "Você ganhou uma SUPERDICA !!\nO terceiro numero do código é : " + novaSenha[1],"ADIVINHPAKAS",1);
-                break;
-                default:
-                break;   
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Você ganhou uma SUPERDICA !!\nO terceiro numero do código é : " + novaSenha[3],"ADIVINHPAKAS",1);
+                }
+            break;
+            default:
+            break;   
             }  
-        }   
     }
 
     public static String[] sinaisDica(int[] numeroInputCerto, int[]novaSenha, int dificult) {//METODOS SINAIS DE DICA
