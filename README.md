@@ -13,5 +13,9 @@ EXPLICAÇÃO DO PROJETO:
 
 -Não tem limite de tentativas
 
+V1.021121  11/11/21
+-Chance de receber uma SuperDica aumentada de 16% para 25%.
+-Corrigido o erro em que as dicas no modo Facil e Dificl não apareciam na ordem certa.
+
 V1.011121  10/11/21
 -Níveis de dificuldade (Fácil/Normal/Difícil) adicionados ao jogo.
