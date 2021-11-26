@@ -10,24 +10,15 @@ public class App {
         int[] numeroInputCerto , novaSenha;
         String[]sinais;
         Object[] dificuldade = {"Facil", "Normal", "Dificil"};
-        Object[] indexButons = {"Jogar", "Sobre", "Dicas"};
+        Object[] indexButons = {"Jogar", "Sobre"};
         //Menu
         do{
             ImageIcon iconIndex = new ImageIcon("icons\\logo.png");
-            index = JOptionPane.showOptionDialog(null,"","AdivinhaPakas",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,iconIndex,indexButons,indexButons[2]);
-            System.out.println(index);
-            if(index==2){
+            index = JOptionPane.showOptionDialog(null,"","AdivinhaPakas",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,iconIndex,indexButons,indexButons[1]);
+            System.out.println(index);  
+            if (index==1){
                 JOptionPane.showMessageDialog(null, 
-                "                                               Instruções de Dicas :\n\n" +
-                                "A cada partida você começa com " + qntdica +" dicas, use-as com sabedoria.\n\n"+ 
-                                "Caso a dica seja  ' \u2705 ' significa que o numero digitado está correto ! \n\n"+
-                                "Caso a dica seja  ' \uD83D\uDD3A ' significa que o numero digitado é maior que o correto ! \n\n"+
-                                "Caso a dica seja  ' \uD83D\uDD3B ' significa que o numero digitado é menor que o correto ! \n\n",
-                "ADIVINHAPAKAS",1);
-            }
-            else if (index==1){
-                JOptionPane.showMessageDialog(null, 
-                "                             Bem Vindo ao ADIVINHAPAKAS !!\n\n" + 
+                "                           Bem Vindo ao ADIVINHAPAKAS !!\n\n" + 
                                 "Esse é um jogo no qual você precisa acertar um numero aleatório.\n\n"+
                                 "Não temos TIMER, então fique a vontade para pensar.\n\n" +
                                 "Tambem não temos limite de tentativas, pode chutar a vontade !\n\n",
@@ -37,6 +28,15 @@ public class App {
                 System.exit(0);
             }
         }while(index!=0);
+        //Fim Menu
+        JOptionPane.showMessageDialog(null, 
+            "                                             Instruções de Dicas :\n\n" +
+                            "A cada partida você começa com " + qntdica +" dicas, use-as com sabedoria.\n\n"+ 
+                            "Caso a dica seja  ' \u2705 ' significa que o numero digitado está correto ! \n\n"+
+                            "Caso a dica seja  ' \uD83D\uDD3A ' significa que o numero digitado é maior que o correto ! \n\n"+
+                            "Caso a dica seja  ' \uD83D\uDD3B ' significa que o numero digitado é menor que o correto ! \n\n",
+            "ADIVINHAPAKAS",1);
+
         dificult = JOptionPane.showOptionDialog(null,"Selecione um nivel de dificuldade","AdivinhaPakas",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,dificuldade,dificuldade[2]);
         if(dificult== -1){
             System.exit(0);
@@ -69,8 +69,7 @@ public class App {
                     case JOptionPane.YES_OPTION :
                     if(qntdica > 0){
                         //BLOCO SUPER DICA 
-                        superdicagen = (int)Math.round(Math.random()*2);
-                        superdica = (int)Math.round(Math.random()*2);
+                        superdicagen = (int)Math.round(Math.random()*2);superdica = (int)Math.round(Math.random()*2);
                         if(superdica == superdicagen){
                             superdicaSwitch(superdicagen, superdica, novaSenha,contsuperdica,dificult);//METODO SUPER DICA 
                             contsuperdica++;
